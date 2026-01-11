@@ -1,0 +1,14 @@
+# Large files
+onion-layer-target.tar.gz
+*.tar.gz
+
+# Docker
+.dockerignore
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temp
+*.tmp
+*.log
