@@ -32,7 +32,7 @@ echo "📦 Chargement de l'image Docker..."
 docker load < onion-layer-target.tar.gz
 
 # Créer le réseau
-echo "🌐 Création du réseau..."
+echo "🌐 Création du réseau.."
 docker network create pentest-network 2>/dev/null || true
 
 # Démarrer la base de données
