@@ -14,7 +14,7 @@ fi
 echo "✅ Docker installé: $(docker --version)"
 
 # Vérifier Docker Compose
-if ! docker compose version &> /dev/null; then
+if ! docker compose version &> /dev/null && ! command -v docker-compose &> /dev/null; then
     echo "❌ Docker Compose n'est pas installé!"
     echo "📥 Installation: https://docs.docker.com/compose/install/"
     exit 1
