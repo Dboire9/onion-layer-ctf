@@ -28,10 +28,14 @@
 
 ```bash
 # 1. Cloner le dépôt
-git clone https://github.com/VOTRE_USERNAME/onion-layer-ctf.git
+git clone https://github.com/Dboire9/onion-layer-ctf.git
 cd onion-layer-ctf
 
-# 2. Lancer le lab
+# 2. Télécharger l'image Docker depuis les Releases
+# https://github.com/Dboire9/onion-layer-ctf/releases/latest
+# Placer onion-layer-target.tar.gz dans ce dossier
+
+# 3. Lancer le lab
 ./start-lab.sh
 
 # 3. Commencer le Jour 1
