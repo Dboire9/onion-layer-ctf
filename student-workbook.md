@@ -247,26 +247,49 @@ _________________________________________________________________
 
 #### 4. Privilèges Sudo
 
+**Commande** :
+```bash
+sudo -l
+```
+
 **Output** :
 ```
 _________________________________________________________________
 _________________________________________________________________
 ```
 
-#### 5. Pivot vers Backup
+**Binaire exploitable identifié** : _____________________________
 
-**Commande d'exploitation sudo** :
+**Utilisateur cible** : _________________________________________
+
+#### 5. Pivot vers Backupuser
+
+**Technique d'exploitation** : __________________________________
+
+**Commandes d'exploitation sudo** :
 ```bash
+_________________________________________________________________
+_________________________________________________________________
 _________________________________________________________________
 ```
 
 **Utilisateur obtenu** : ________________________________________
 
+**Vérification** :
+```bash
+whoami
+id
+```
+
 ### 🚩 Flags Jour 3
 
-**Flag Developer** : `FLAG{_____________________________________}`
+**Flag Part 1 (Developer)** : `FLAG{_____________________________________}`
 
-**Flag Backup** : `FLAG{________________________________________}`
+**Localisation** : _____________________________________________
+
+**Flag Part 2 (Backupuser)** : `FLAG{________________________________________}`
+
+**Localisation** : _____________________________________________
 
 ### 🔧 Outils de Cracking (Optionnel)
 
@@ -391,18 +414,38 @@ _________________________________________________________________
 _________________________________________________________________
 ```
 
-#### 2. Exploitation Choisie
+#### 2. Analyse du Binaire SUID
 
-**Méthode** : ☐ SUID  ☐ Cron  ☐ Autre : __________________
+**Binaire ciblé** : _____________________________________________
 
-**Explication de la vulnérabilité** :
+**Localisation** : ______________________________________________
+
+**Que fait ce binaire ?** : _____________________________________
+
+**Test du binaire** :
+```bash
+_________________________________________________________________
+```
+
+**Output** : ____________________________________________________
+
+#### 3. Identification de la Vulnérabilité
+
+**Type de vulnérabilité** : ☐ PATH Hijacking  ☐ Command Injection  ☐ Buffer Overflow  ☐ Autre : __________
+
+**Explication technique** :
 ```
 _________________________________________________________________
 _________________________________________________________________
 _________________________________________________________________
 ```
 
-#### 3. Exploitation Complète
+**Preuve de concept** :
+```bash
+_________________________________________________________________
+```
+
+#### 4. Exploitation Complète
 
 **Commandes exécutées** :
 ```bash
@@ -468,11 +511,13 @@ _________________________________________________________________
 
 | ID | Vulnérabilité | Sévérité | CVSS | Jour |
 |----|---------------|----------|------|------|
-| V01 | | | | |
-| V02 | | | | |
-| V03 | | | | |
-| V04 | | | | |
-| V05 | | | | |
+| V01 | SQL Injection | | | 2 |
+| V02 | Local File Inclusion | | | 2 |
+| V03 | Unrestricted File Upload | | | 2 |
+| V04 | Hardcoded Credentials | | | 3 |
+| V05 | Sudo Misconfiguration | | | 3 |
+| V06 | Command Injection | | | 4 |
+| V07 | SUID Binary Exploitation | | | 5 |
 
 #### 4. Détail des Vulnérabilités
 
@@ -533,13 +578,14 @@ Jour 4: Command Injection → backup confirmed
 Jour 5: SUID/Cron → ROOT
 ```
 
-### Flags Collectés
+### Flags Collectés (6 au total)
 
-- [ ] Jour 1 : `FLAG{reconnaissance_master_2026}`
-- [ ] Jour 2 : `FLAG{web_shell_deployed_successfully}`
-- [ ] Jour 3 : `FLAG{lateral_movement_achieved}`
-- [ ] Jour 4 : `FLAG{code_auditor_supreme}`
-- [ ] Jour 5 : `FLAG{root_access_granted_gg}`
+- [ ] Jour 1 : `FLAG{...}`
+- [ ] Jour 2 : `FLAG{...}`
+- [ ] Jour 3 Part 1 : `FLAG{...}`
+- [ ] Jour 3 Part 2 : `FLAG{...}`
+- [ ] Jour 4 : `FLAG{...}`
+- [ ] Jour 5 : `FLAG{...}`
 
 ### Compétences Acquises
 
