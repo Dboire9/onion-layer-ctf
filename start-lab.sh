@@ -61,17 +61,15 @@ docker run -d \
   -p 2222:22 \
   -p 8888:8888 \
   -e MYSQL_ROOT_PASSWORD=sup3rs3cr3t \
-  -e FLAG_DAY1=FLAG{reconnaissance_master_2026} \
-  -e FLAG_DAY2=FLAG{web_shell_deployed_successfully} \
-  -e FLAG_DAY3_PART1=FLAG{developer_access_confirmed} \
-  -e FLAG_DAY3_PART2=FLAG{lateral_movement_achieved} \
-  -e FLAG_DAY4=FLAG{code_auditor_supreme} \
-  -e FLAG_DAY5=FLAG{root_access_granted_gg} \
   --cap-add NET_ADMIN \
   pentest-target:latest \
   2>/dev/null || docker start onion-layer-target
 
 if [ $? -eq 0 ]; then
+    # Autoriser les connexions reverse shell depuis les containers Docker
+    echo "🔧 Configuration du firewall pour les reverse shells..."
+    iptables -I INPUT -i br+ -j ACCEPT 2>/dev/null || true
+    
     echo ""
     echo "✅ Lab démarré avec succès!"
     echo ""
@@ -80,6 +78,7 @@ if [ $? -eq 0 ]; then
     echo "   - SSH:    ssh user@localhost -p 2222"
     echo "   - FTP:    ftp://localhost:2121"
     echo ""
+    echo "💡 Reverse shell: nc -lvnp 4444 puis utilisez 172.18.0.1:4444"
     echo "📚 Consultez le fichier README.md pour commencer"
     echo "🎯 Bon pentest!"
 else
