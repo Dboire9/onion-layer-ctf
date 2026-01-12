@@ -37,24 +37,29 @@ docker network create pentest-network 2>/dev/null || true
 
 # Démarrer la base de données
 echo "🗄️  Démarrage de la base de données..."
+# Supprimer l'ancien container pour éviter la persistance
+docker rm -f onion-db 2>/dev/null || true
 docker run -d \
   --name onion-db \
   --network pentest-network \
+  --rm \
   -e MYSQL_ROOT_PASSWORD=sup3rs3cr3t \
   -e MYSQL_DATABASE=webapp \
   -e MYSQL_USER=webuser \
   -e MYSQL_PASSWORD=webpass123 \
-  mysql:8.0 \
-  2>/dev/null || docker start onion-db
+  mysql:8.0
 
 sleep 3
 
 # Démarrer le container cible
 echo "🎯 Démarrage du container cible..."
+# Supprimer l'ancien container pour un état propre
+docker rm -f onion-layer-target 2>/dev/null || true
 docker run -d \
   --name onion-layer-target \
   --hostname target-server \
   --network pentest-network \
+  --rm \
   -p 8080:80 \
   -p 2121:21 \
   -p 21100-21110:21100-21110 \
@@ -62,8 +67,7 @@ docker run -d \
   -p 8888:8888 \
   -e MYSQL_ROOT_PASSWORD=sup3rs3cr3t \
   --cap-add NET_ADMIN \
-  pentest-target:latest \
-  2>/dev/null || docker start onion-layer-target
+  pentest-target:latest
 
 if [ $? -eq 0 ]; then
     # Autoriser les connexions reverse shell depuis les containers Docker
