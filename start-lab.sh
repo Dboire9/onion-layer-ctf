@@ -49,7 +49,39 @@ docker run -d \
   -e MYSQL_PASSWORD=webpass123 \
   mysql:8.0
 
-sleep 3
+# Attendre que MySQL soit prêt
+echo "⏳ Attente de MySQL..."
+sleep 8
+for i in {1..30}; do
+    if docker exec onion-db mysql -uwebuser -pwebpass123 -e "SELECT 1" &>/dev/null; then
+        break
+    fi
+    sleep 1
+done
+
+# Initialiser la base de données
+echo "🔧 Initialisation de la base de données..."
+docker exec onion-db mysql -uwebuser -pwebpass123 webapp -e "
+CREATE TABLE IF NOT EXISTS users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    email VARCHAR(100),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO users (username, password, email) VALUES 
+    ('admin', 'admin', 'admin@securecorp.local'),
+    ('john', 'password123', 'john@securecorp.local'),
+    ('alice', 'alice2024', 'alice@securecorp.local');
+" 2>&1 | grep -v "Warning"
+
+if [ $? -eq 0 ]; then
+    echo "✅ Base de données initialisée"
+else
+    echo "❌ Erreur lors de l'initialisation de la base"
+    exit 1
+fi
 
 # Démarrer le container cible
 echo "🎯 Démarrage du container cible..."
