@@ -74,9 +74,9 @@ INSERT INTO users (username, password, email) VALUES
     ('admin', 'admin', 'admin@securecorp.local'),
     ('john', 'password123', 'john@securecorp.local'),
     ('alice', 'alice2024', 'alice@securecorp.local');
-" 2>&1 | grep -v "Warning"
+" 2>&1 | grep -v "Warning" || true
 
-if [ $? -eq 0 ]; then
+if [ ${PIPESTATUS[0]} -eq 0 ]; then
     echo "✅ Base de données initialisée"
 else
     echo "❌ Erreur lors de l'initialisation de la base"
